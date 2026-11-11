@@ -6,7 +6,11 @@ import { resetPonds } from './data/api'
 vi.mock('react-leaflet', () => ({
   MapContainer: ({ children }) => <div data-testid="map-container">{children}</div>,
   TileLayer: () => <div data-testid="tile-layer" />,
-  Marker: ({ children }) => <div data-testid="marker">{children}</div>,
+  Marker: ({ children, icon }) => (
+    <div data-testid="marker" data-icon-url={icon?.options.iconUrl}>
+      {children}
+    </div>
+  ),
   Popup: ({ children }) => <div>{children}</div>,
 }))
 
@@ -75,6 +79,8 @@ describe('US05: Johor map', () => {
     render(<App initialRole="farmer" initialFarmerId="farmer-1" />)
 
     expect(screen.getByText(/johor pond map/i)).toBeInTheDocument()
-    expect(document.querySelectorAll('[data-testid="marker"]').length).toBeGreaterThan(0)
+    const markers = screen.getAllByTestId('marker')
+    expect(markers.length).toBeGreaterThan(0)
+    expect(markers.every((marker) => marker.dataset.iconUrl)).toBe(true)
   })
 })

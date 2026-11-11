@@ -1,8 +1,22 @@
 import { useMemo, useState } from 'react'
+import { Icon } from 'leaflet'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
+import markerIcon from 'leaflet/dist/images/marker-icon.png'
+import markerIconRetina from 'leaflet/dist/images/marker-icon-2x.png'
+import markerShadow from 'leaflet/dist/images/marker-shadow.png'
 import 'leaflet/dist/leaflet.css'
 import './App.css'
 import { farmers, getPondById, getPonds, toggleFieldSharing } from './data/api'
+
+const pondMarkerIcon = new Icon({
+  iconUrl: markerIcon,
+  iconRetinaUrl: markerIconRetina,
+  shadowUrl: markerShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+})
 
 function App({ initialRole = 'farmer', initialFarmerId = 'farmer-1' }) {
   const [role, setRole] = useState(initialRole)
@@ -162,7 +176,11 @@ function App({ initialRole = 'farmer', initialFarmerId = 'farmer-1' }) {
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 {communityPonds.map((pond) => (
-                  <Marker key={pond.id} position={[pond.coordinates.lat, pond.coordinates.lng]}>
+                  <Marker
+                    key={pond.id}
+                    position={[pond.coordinates.lat, pond.coordinates.lng]}
+                    icon={pondMarkerIcon}
+                  >
                     <Popup>
                       <button type="button" onClick={() => setSelectedPondId(pond.id)}>
                         {pond.name}
