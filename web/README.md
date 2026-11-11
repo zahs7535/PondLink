@@ -1,16 +1,22 @@
-# React + Vite
+# PondLink Johor
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+PondLink is a student prototype for Johor fish farmers. It uses fictional sample
+data only. Farmer views contain only fields marked as shared.
 
-Currently, two official plugins are available:
+## Local development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```sh
+npm ci
+npm run dev
+```
 
-## React Compiler
+Run acceptance tests with `npm test` and create a production build with
+`npm run build`.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## GitHub Pages
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The site is deployed from the repository root using the workflow in
+`.github/workflows/deploy.yml`. In the repository's **Settings → Pages**, set
+the build and deployment source to **GitHub Actions**. A push to `main` that
+changes `web/` builds and deploys the app to
+<https://zahs7535.github.io/PondLink/>.
